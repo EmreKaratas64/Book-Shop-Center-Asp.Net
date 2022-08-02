@@ -1,0 +1,84 @@
+﻿@using Book_Shop.Models.Entity;
+@model List<ADMINLER>
+@{
+    ViewBag.Title = "Admins";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+
+
+@if (TempData["DeleteDenied"] != null)
+{
+    <div class="alert alert-dismissible" style="background: #ffc107">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <h5><i class="icon fas fa-exclamation-triangle"></i>&nbsp; Alert!</h5>
+        @TempData["DeleteDenied"]
+    </div>
+}
+
+@if (TempData["DeleteAccept"] != null)
+{
+    <div class="alert alert-dismissible" style="background: #28a745; color:white">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <h5><i class="icon fas fa-check"></i>&nbsp; Alert!</h5>
+        @TempData["DeleteAccept"]
+    </div>
+}
+
+
+
+<h2>Admins</h2>
+<br />
+<table class="table table-striped">
+    <tr style="background-color: #0e63ea; color: white;">
+        <td>ID</td>
+        <td>USER NAME</td>
+        <td>AUTHORITY</td>
+        <td>DELETE ADMIN</td>
+        <td>EDIT</td>
+    </tr>
+    @foreach (var a in Model)
+    {
+        <tr>
+            <td>@a.ID</td>
+            <td>@a.MAIL</td>
+            <td>@a.YETKI</td>
+            <td>
+                <a href="@Url.Action("DeleteAdmin","Settings",new {id=a.ID})" class="btn btn-danger" onclick="return confirm('Do you want to delete')">
+                    <i class="glyphicon glyphicon-trash"></i>&nbsp;
+                    Delete
+                </a>
+            </td>
+            <td><a href="/Settings/UpdateAdmin/@a.ID" class="btn btn-info"><i class="glyphicon glyphicon-edit"></i>&nbsp; Update</a></td>
+        </tr>
+    }
+</table>
+<button class="btn add" data-toggle="modal" data-target="#Modal1"><i class="fas fa-plus"></i>&nbsp; Add Admin</button>
+
+<div class="modal" id="Modal1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Adding Admin Panel</h2>
+            </div>
+            <form action="/Settings/AddAdmin/" method="post">
+                <div class="modal-body">
+                    <label>User Name</label>
+                    <input type="text" name="MAIL" placeholder="user name..." class="form-control" required />
+                    <br />
+                    <label>Password</label>
+                    <input type="password" name="SIFRE" placeholder="password..." class="form-control" required />
+                    <br />
+                    <label>Authority</label>
+                    <input type="text" name="YETKI" placeholder="authority..." class="form-control" required />
+                    <br />
+                    <button type="submit" class="btn btn-info">Add Admin</button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>

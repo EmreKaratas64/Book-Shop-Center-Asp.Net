@@ -1,0 +1,207 @@
+﻿@using Book_Shop.Models.Entity;
+@model List<HAREKETLER>
+
+@{
+    ViewBag.Title = "Client Purchase History";
+    Layout = "~/Views/Shared/_LayoutClientPanel.cshtml";
+    string approve = "";
+    string approve_class = "";
+    DateTime due =DateTime.Now;
+}
+
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Purchase History</title>
+
+    <!-- Tell the browser to be responsive to screen width -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet" href="~/AdminLTE-3.0.4/plugins/fontawesome-free/css/all.min.css">
+
+    <!-- Ionicons -->
+
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+    <!-- Theme style -->
+
+    <link rel="stylesheet" href="~/AdminLTE-3.0.4/dist/css/adminlte.min.css">
+
+    <!-- Google Font: Source Sans Pro -->
+
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+</head>
+
+<body class="hold-transition sidebar-mini">
+
+    <div class="wrapper">
+
+        <section class="content-header">
+
+            <div class="container-fluid">
+
+                <div class="row mb-2">
+
+                    <div class="col-sm-6">
+
+                        <h1>Purchase History</h1>
+
+                    </div>
+
+                </div>
+
+            </div><!-- /.container-fluid -->
+
+        </section>
+
+        <!-- Main content -->
+
+        <section class="content">
+
+            <div class="container-fluid">
+
+                <!-- /.row -->
+
+                <div class="row">
+
+                    <div class="col-12">
+
+                        <div class="card">
+
+                            <div class="card-header">
+
+                                <h3 class="card-title">Bought Books</h3>
+
+                                <div class="card-tools">
+
+                                    <div class="input-group input-group-sm" style="width: 150px;">
+
+                                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                                        <div class="input-group-append">
+
+                                            <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <!-- /.card-header -->
+
+                            <div class="card-body table-responsive p-0">
+
+                                <table class="table table-hover text-nowrap">
+
+                                    <thead>
+
+                                        <tr>
+
+                                            <th>PURCHASE ID</th>
+
+                                            <th>BOOK</th>
+
+                                            <th>UNIT PRICE</th>
+
+                                            <th>AMOUNT</th>
+
+                                            <th>TOTAL PRICE</th>
+
+                                            <th>DATE</th>
+
+                                            <th>STATE</th>
+
+                                        </tr>
+
+                                    </thead>
+
+                                    <tbody>
+
+                                        @foreach (var h in Model)
+                                        {
+                                            due = DateTime.Parse(h.TARIH.ToString()).AddDays(3);
+                                            <tr>
+
+                                                @if(h.KASAID != null)
+                                                {
+                                                    approve = "approved";
+                                                    approve_class = "text-success";
+                                                }
+                                                else if(DateTime.Now >= due)
+                                                {
+                                                    approve = "canceled";
+                                                    approve_class = "text-danger";
+                                                }
+                                                else
+                                                {
+                                                    approve = "waiting";
+                                                    approve_class = "text-warning";
+                                                }
+
+                                                <td>@h.ID</td>
+
+                                                <td>@h.KITAPLAR.AD</td>
+
+                                                <td>@h.BIRIMFIYAT ₺</td>
+
+                                                <td>@h.ADET</td>
+
+                                                <td>@h.TUTAR ₺</td>
+
+                                                <td>@Convert.ToDateTime(h.TARIH).ToString()</td>
+
+                                                <td><span class="@approve_class">@approve</span></td>
+
+                                            </tr>
+
+                                        }
+
+                                    </tbody>
+
+                                </table>
+
+                            </div>
+
+                            <!-- /.card-body -->
+
+                        </div>
+
+                        <!-- /.card -->
+
+                    </div>
+
+                </div>
+
+                <!-- /.row -->
+                <!-- /.row -->
+
+            </div><!-- /.container-fluid -->
+
+        </section>
+
+        <!-- /.content -->
+
+    </div>
+
+    <!-- /.content-wrapper -->
+    <!-- ./wrapper -->
+    <!-- jQuery -->
+
+</body>
+
+</html>

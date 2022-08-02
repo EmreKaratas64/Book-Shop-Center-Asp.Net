@@ -1,0 +1,34 @@
+﻿@using Book_Shop.Models.Entity;
+@using PagedList;
+@using PagedList.Mvc;
+@model PagedList<YAZARLAR>
+@{
+    ViewBag.Title = "Authors";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+
+<br />
+<table class="table table-striped">
+    <tr style="background-color: #0e63ea; color: white;">
+        <td>AUTHOR ID</td>
+        <td>AUTHOR NAME</td>
+        <td>DELETE AUTHOR</td>
+        <td>UPDATE AUTHOR</td>
+        <td>AUTHOR BOOKS</td>
+    </tr>
+    @foreach (var a in Model)
+    {
+        <tr>
+            <td>@a.ID</td>
+            <td>@a.AD</td>
+            <td><a href="/Author/DeleteAuthor/@a.ID" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i>&nbsp; Delete</a></td>
+            <td><a href="/Author/BringAuthor/@a.ID" class="btn btn-warning"><i class="glyphicon glyphicon-edit"></i>&nbsp; Update</a></td>
+            <td><a href="/Author/AuthorBook/@a.ID" class="btn btn-info"><i class="fas fa-book"></i>&nbsp; Author Books</a></td>
+        </tr>
+    }
+</table>
+@Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("Index", new { sayfa }))
+<a href="/Author/AddAuthor/" class="btn add"><i class="fas fa-plus"></i>&nbsp; Add Author</a>
+
+

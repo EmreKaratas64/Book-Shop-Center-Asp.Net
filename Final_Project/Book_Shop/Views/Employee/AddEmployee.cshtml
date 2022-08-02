@@ -1,0 +1,23 @@
+﻿@model Book_Shop.Models.Entity.PERSONELLER
+@{
+    ViewBag.Title = "Add Employee";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+
+@using (Html.BeginForm("AddEmployee", "Employee", FormMethod.Post))
+{
+<div class="form-group" style="margin-top:15px">
+    <label>Employee Name</label>
+    @Html.TextBoxFor(e => e.PERSONEL, new { @class = "form-control", placeholder = "Employee name...", required = "required" })
+    @Html.ValidationMessageFor(e => e.PERSONEL, "", new { @style = "color:red" })
+    <br />
+    <label>Employee Mail</label>
+    @Html.TextBoxFor(e => e.MAIL, new { @class = "form-control", placeholder = "Eployee mail...", required = "required" })
+    @Html.ValidationMessageFor(e => e.MAIL, "", new { @style = "color:red" })
+</div>
+    <div style="margin-top:10px">
+        <button class="btn add"><i class="fas fa-plus"></i>&nbsp; Add Employee</button>
+    </div>
+}
+

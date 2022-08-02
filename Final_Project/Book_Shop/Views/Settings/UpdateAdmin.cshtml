@@ -1,0 +1,33 @@
+﻿@model Book_Shop.Models.Entity.ADMINLER
+@{
+    ViewBag.Title = "UpdateAdmin";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+<br />
+@using (Html.BeginForm("UpdateAdmin", "Settings", FormMethod.Post))
+{
+    <div style="margin-top:15px">
+        <label>ID</label>
+        @Html.TextBoxFor(c => c.ID, new { @class = "form-control" })
+    </div>
+    <div style="margin-top:15px">
+        <label>User Name</label>
+        @Html.TextBoxFor(c => c.MAIL, new { @class = "form-control", required = "required", placeholder="user name..." })
+        @Html.ValidationMessageFor(c => c.MAIL, "", new { @style = "color:red" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Password</label>
+        @Html.PasswordFor(c => c.SIFRE, new { @class = "form-control", required = "required", placeholder = "password..." })
+        @Html.ValidationMessageFor(c => c.SIFRE, "", new { @style = "color:red" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Authority</label>
+        @Html.TextBoxFor(c => c.YETKI, new { @class = "form-control", required = "required" })
+        @Html.ValidationMessageFor(c => c.YETKI, "", new { @style = "color:red" })
+    </div>
+    <div style="margin-top:15px">
+        <button class="btn btn-warning"><i class="glyphicon glyphicon-edit"></i>&nbsp; Update Admin</button>
+    </div>
+
+}
+

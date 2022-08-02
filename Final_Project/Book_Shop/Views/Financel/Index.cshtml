@@ -1,0 +1,33 @@
+﻿@using Book_Shop.Models.Entity
+@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<KASA>
+@{
+    ViewBag.Title = "Financial Statement";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2>Financel Statement</h2>
+<br />
+<table class="table table-striped">
+    <tr style="background-color: #0e63ea; color: white;">
+        <td>ID</td>
+        <td>MONTH AND YEAR</td>
+        <td>TOTAL AMOUNT AT CASE</td>
+        <td>UPDATE CASE</td>
+    </tr>
+
+    @foreach (var c in Model)
+    {
+        <tr>
+            <td>@c.ID</td>
+            <td>@c.AYVEYIL</td>
+            <td>@c.TUTAR ₺</td>
+            <td><a href="/Financel/BringFinancel/@c.ID" class="btn btn-warning"><i class="glyphicon glyphicon-edit"></i>&nbsp; Update</a></td>
+        </tr>
+    }
+
+</table>
+@Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("Index", new { sayfa }))
+<a href="/Financel/AddFinancel/" class="btn add"><i class="fas fa-plus"></i>&nbsp; Add New Case Record</a>
+

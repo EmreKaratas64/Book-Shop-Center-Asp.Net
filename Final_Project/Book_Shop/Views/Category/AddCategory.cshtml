@@ -1,0 +1,22 @@
+﻿@model Book_Shop.Models.Entity.KATEGORILER
+@{
+    ViewBag.Title = "Add Category";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2>Add Category</h2>
+
+@using (Html.BeginForm("AddCategory", "Category", FormMethod.Post))
+{
+<div style="margin-top:15px">
+    <label>Category Name</label>
+    @Html.TextBoxFor(c => c.AD, new {@Value="Deneme", @class = "form-control", placeholder = "Category name...", required = "required" })
+    @Html.ValidationMessageFor(c => c.AD, "", new { @style = "color:red" })
+</div>
+    <div style="margin-top:15px">
+        <button id="btn1" class="btn add"><i class="fas fa-plus"></i>&nbsp; Add Category</button>
+    </div>
+}
+
+
+

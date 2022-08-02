@@ -1,0 +1,43 @@
+﻿@model Book_Shop.Models.Entity.MUSTERILER
+@{
+    ViewBag.Title = "Update Client";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+@using (Html.BeginForm("UpdateClient", "Client", FormMethod.Post))
+{
+    <div style="margin-top:15px">
+        <label>Client ID</label>
+        @Html.TextBoxFor(c => c.ID, new { @class = "form-control" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Client First Name</label>
+        @Html.TextBoxFor(c => c.AD, new { @class = "form-control", required = "required" })
+        @Html.ValidationMessageFor(c => c.AD, "", new { @style = "color:red" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Client Last Name</label>
+        @Html.TextBoxFor(c => c.SOYAD, new { @class = "form-control", required = "required" })
+        @Html.ValidationMessageFor(c => c.SOYAD, "", new { @style = "color:red" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Client Mail</label>
+        @Html.TextBoxFor(c => c.MAIL, new { @class = "form-control", required = "required" })
+        @Html.ValidationMessageFor(c => c.MAIL, "", new { @style = "color:red" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Client User Name</label>
+        @Html.TextBoxFor(c => c.KULLANICIADI, new { @class = "form-control", required = "required" })
+        @Html.ValidationMessageFor(c => c.KULLANICIADI, "", new { @style = "color:red" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Client Phone Number</label>
+        @Html.TextBoxFor(c => c.TELEFON, new { @class = "form-control", required = "required" })
+        @Html.ValidationMessageFor(c => c.TELEFON, "", new { @style = "color:red" })
+    </div>
+    <div style="margin-top:15px">
+        <button class="btn btn-warning"><i class="glyphicon glyphicon-edit"></i>&nbsp; Update Client</button>
+    </div>
+
+}
+

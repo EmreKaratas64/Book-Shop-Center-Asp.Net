@@ -1,0 +1,232 @@
+﻿@model Book_Shop.Models.MyClasses.Class1
+@{
+    ViewBag.Title = "Statistics";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<link href="~/web2/css/style.css" rel="stylesheet" />
+<script src="~/web2/js/Chart1.js"></script>
+<link href="~/web2/css/jqvmap.css" rel="stylesheet" />
+<script src="~/web2/js/jquery.min.js"></script>
+<script src="~/web2/js/jquery.vmap.js"></script>
+<script src="~/web2/js/jquery.vmap.sampledata.js"></script>
+<script src="~/web2/js/jquery.vmap.world.js"></script>
+
+<script>
+    $(document).ready(function (c) {
+        $('.alert-close6').on('click', function (c) {
+            $('.world-map').fadeOut('slow', function (c) {
+                $('.world-map').remove();
+            });
+        });
+    });
+</script>
+
+
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        jQuery('#vmap').vectorMap({
+            map: 'world_en',
+            backgroundColor: '#333333',
+            color: '#ffffff',
+            hoverOpacity: 0.7,
+            selectedColor: '#666666',
+            enableZoom: true,
+            showTooltip: true,
+            values: sample_data,
+            scaleColors: ['#C8EEFF', '#006491'],
+            normalizeFunction: 'polynomial'
+        });
+    });
+</script>
+
+
+<br />
+<h3 style="font-size: 20px; font-weight: 400;"><label style="font-weight:bold">User Mail: </label> @HttpContext.Current.User.Identity.Name</h3>
+
+<div style="margin-right:15px;margin-left:15px">
+    <div class="list_of_members">
+        <div class="sales">
+            <div class="icon">
+                <i class="dollar"></i>
+            </div>
+            <div class="icon-text">
+                <h3>@Model.Kasa.OrderByDescending(k => k.ID).Select(m => m.TUTAR).FirstOrDefault() ₺</h3>
+                <p>Total Amount at Case</p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="new-users">
+            <div class="icon">
+                <i class="user1"></i>
+            </div>
+            <div class="icon-text">
+                <h3>@Model.Musteriler.Count().ToString()</h3>
+                <p>Number of Clients</p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="orders">
+            <div class="icon">
+                <i class="order"></i>
+            </div>
+            <div class="icon-text">
+                <h3>@Model.Hareketler.Sum(h => h.ADET).ToString()</h3>
+                <p>Number of Sold Books</p>
+                @*Bugün yapılan satışlar*@
+                @*<p>@Model.Hareketler.Where(x=>x.TARIH == DateTime.Parse(DateTime.Now.ToShortDateString())).Count()</p>*@
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="visitors">
+            <div class="icon">
+                <i class="visit"></i>
+            </div>
+            <div class="icon-text">
+                <h3>85k</h3>
+                <p>Visits</p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+        <br /><br />
+        <div class="sales">
+            <div class="icon">
+                <i class="dollar"></i>
+            </div>
+            <div class="icon-text">
+                <h3>4800 ₺</h3>
+                <p>Total Debts</p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="new-users">
+            <div class="icon">
+                <i class="user1"></i>
+            </div>
+            <div class="icon-text">
+                <h3>@Model.Kitaplar.Sum(k=>k.STOK).ToString()</h3>
+                <p>Book Stock</p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="orders">
+            <div class="icon">
+                <i class="order"></i>
+            </div>
+            <div class="icon-text">
+                <h3>@Model.Kategoriler.Count().ToString()</h3>
+                <p>Number of Categories</p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="visitors">
+            <div class="icon">
+                <i class="visit"></i>
+            </div>
+            <div class="icon-text">
+                <h3>@*@Model.tbliletisim.Where(i=>i.CEVAPLANDI == true).Count().ToString()*@38</h3>
+                <p>Replied Messages</p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+    <br /><br /><br /><br /><br />
+
+    <div class="total-sales">
+        <div class="user-trends">
+            <div class="alert-close7"> </div>
+
+            <canvas id="bar" height="450" width="1150"></canvas>
+            <script>
+
+                var barChartData = {
+                    labels: ["January", "February", "March", "April", "May", "June", "July", "Agust", "September", "October", "November", "December"],
+                    datasets: [
+                        {
+                            fillColor: "rgba(255, 137, 167, 0.78)",
+                            strokeColor: "rgba(220,220,220,1)",
+                            data: [65, 59, 90, 81, 56, 55, 40, 55, 90, 35, 78, 89]
+                        },
+                        {
+                            fillColor: "rgba(140, 145, 255, 0.69)",
+                            strokeColor: "rgba(151,187,205,1)",
+                            data: [28, 48, 40, 19, 96, 27, 100, 40, 42, 85, 72, 39]
+                        }
+                    ]
+
+                }
+
+                var myLine = new Chart(document.getElementById("bar").getContext("2d")).Bar(barChartData);
+
+            </script>
+        </div>
+        <div class="to-do">
+            <div class="alert-close5"> </div>
+            <h3>To-Do</h3>
+            <div class="checkbox-form">
+                <div class="check">
+                    <label class="checkbox"><input type="checkbox" name="checkbox"><i> </i>Check the case</label>
+                </div>
+                <div class="check">
+                    <label class="checkbox"><input type="checkbox" name="checkbox"><i> </i>Reply client messages</label>
+                </div>
+                <div class="check">
+                    <label class="checkbox"><input type="checkbox" name="checkbox"><i> </i>Call the publisher</label>
+                </div>
+                <div class="check">
+                    <label class="checkbox"><input type="checkbox" name="checkbox"><i> </i>Add the new books</label>
+                </div>
+                <div class="check">
+                    <label class="checkbox"><input type="checkbox" name="checkbox"><i> </i>Deliver the client requests</label>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <br /><br /><br />
+
+
+    <div class="total-world">
+        <div class="world-map">
+            <div class="alert-close6"> </div>
+            <h3>Clients around world</h3>
+            <p><span class="color1"></span>40%<span class="color2"></span>12%<span class="color3"></span>11%<span class="color4"></span>10%<span class="color5"></span>18%</p>
+            <div class="clearfix"></div>
+            <div id="vmap" style="width: 1000px; height: 550px;"></div>
+        </div>
+        <div class="site-report">
+            <div class="alert-close3"> </div>
+            <h3>Site Report</h3>
+            <div class="skills-top">
+                <h5>Reliability</h5>
+                <h4>96%</h4>
+                <div class="clearfix"></div>
+                <div class="skills">
+                    <div class="skill" style="width:95%"></div>
+                </div>
+            </div>
+            <div class="skills-top">
+                <h5>Satisfaction</h5>
+                <h4>94%</h4>
+                <div class="clearfix"></div>
+                <div class="skills">
+                    <div class="skill1" style="width:94%"></div>
+                </div>
+            </div>
+            <div class="skills-top">
+                <h5>Weekly Feedback</h5>
+                <h4>76%</h4>
+                <div class="clearfix"></div>
+                <div class="skills">
+                    <div class="skill2" style="width:76%"></div>
+                </div>
+            </div>
+            <p>Better feedbacks comes with better customer care service. For further readings !</p>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+</div>

@@ -1,0 +1,32 @@
+﻿@using Book_Shop.Models.Entity;
+@using PagedList;
+@using PagedList.Mvc;
+@model PagedList<PERSONELLER>
+@{
+    ViewBag.Title = "Employees";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<br />
+
+<table class="table table-striped">
+    <tr style="background-color: #0e63ea; color: white;">
+        <td>EMPLOYEE ID</td>
+        <td>EMPLOYEE NAME</td>
+        <td>EMPLOYEE MAIL</td>
+        <td>DELETE EMPLOYEE</td>
+        <td>UPDATE EMPLOYEE</td>
+    </tr>
+    @foreach (var e in Model)
+    {
+        <tr>
+            <td>@e.ID</td>
+            <td>@e.PERSONEL</td>
+            <td>@e.MAIL</td>
+            <td><a href="/Employee/DeleteEmployee/@e.ID" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i>&nbsp; Delete</a></td>
+            <td><a href="/Employee/BringEmployee/@e.ID" class="btn btn-warning"><i class="glyphicon glyphicon-edit"></i>&nbsp; Update</a></td>
+        </tr>
+    }
+</table>
+@Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("Index", new { sayfa }))
+<a href="/Employee/AddEmployee/" class="btn add"><i class="fas fa-plus"></i>&nbsp; Add Employee</a>

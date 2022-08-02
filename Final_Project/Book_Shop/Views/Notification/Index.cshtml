@@ -1,0 +1,33 @@
+﻿@using Book_Shop.Models.Entity;
+@using PagedList;
+@using PagedList.Mvc;
+@model PagedList<TBLDUYURULAR>
+@{
+    ViewBag.Title = "Notifications";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<br />
+
+<table class="table table-striped">
+    <tr style="background-color: #0e63ea; color: white;">
+        <td>ID</td>
+        <td>TITLE</td>
+        <td>DATE</td>
+        <td>DELETE</td>
+        <td>VIEW DETAILS</td>
+    </tr>
+    @foreach (var d in Model)
+    {
+        <tr>
+            <td>@d.ID</td>
+            <td>@d.BASLIK</td>
+            <td>@Convert.ToDateTime(d.TARIH).ToString("dd/MM/yyyy")</td>
+            <td><a href="/Notification/DeleteNotification/@d.ID" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i>&nbsp; Delete</a></td>
+            <td><a href="/Notification/BringNotification/@d.ID" class="btn btn-info"><i class="fas fa-info-circle"></i>&nbsp; View Details</a></td>
+        </tr>
+    }
+</table>
+@Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("Index", new { sayfa }))
+<a href="/Notification/AddNotification/" class="btn add"><i class="fas fa-plus"></i>&nbsp; Add Notification</a>
+

@@ -1,0 +1,35 @@
+﻿@using Book_Shop.Models.Entity;
+@model List<HAREKETLER>
+@{
+    ViewBag.Title = "Purchase History";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+
+<h2>Client: @ViewBag.client_name</h2>
+
+<br />
+
+<table class="table table-striped">
+    <tr style="background-color: #0e63ea; color: white;">
+        <td>PURCHASE ID</td>
+        <td>BOOK</td>
+        <td>UNIT PRICE</td>
+        <td>AMOUNT</td>
+        <td>TOTAL</td>
+        <td>DATE</td>
+    </tr>
+
+    @foreach (var h in Model)
+    {
+        <tr>
+            <td>@h.ID</td>
+            <td>@h.KITAPLAR.AD</td>
+            <td>@h.BIRIMFIYAT ₺</td>
+            <td>@h.ADET</td>
+            <td>@h.TUTAR ₺</td>
+            <td>@Convert.ToDateTime(h.TARIH).ToString("dd/MM/yyyy")</td>
+        </tr>
+    }
+
+</table>

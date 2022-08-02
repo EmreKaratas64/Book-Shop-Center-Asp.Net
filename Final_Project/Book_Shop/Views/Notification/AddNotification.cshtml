@@ -1,0 +1,24 @@
+﻿@model Book_Shop.Models.Entity.TBLDUYURULAR
+@{
+    ViewBag.Title = "Add Notification";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+@using (Html.BeginForm("AddNotification", "Notification", FormMethod.Post))
+{
+    <div class="form-group" style="margin-top:15px">
+        <label>Title</label>
+        @Html.TextBoxFor(d => d.BASLIK, new { @class = "form-control", placeholder = "Notfication title...", required = "required" })
+        <br />
+        <label>Content</label>
+        @Html.TextAreaFor(d => d.ICERIK, new { @class = "form-control", placeholder = "Notification content...", required = "required", rows = 5 })
+        <br />
+        <label>Date</label>
+        @Html.TextBoxFor(d => d.TARIH, "{0:dd.MM.yyyy}", new { @class = "form-control", placeholder = "Notfication date...", required = "required" })
+    </div>
+    <div style="margin-top:10px">
+        <button class="btn add"><i class="fas fa-plus"></i>&nbsp; Add Notification</button>
+    </div>
+}
+
+

@@ -1,0 +1,52 @@
+﻿@model Book_Shop.Models.Entity.MUSTERILER
+@{
+    ViewBag.Title = "Add Client";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+@using (Html.BeginForm("AddClient", "Client", FormMethod.Post))
+{
+    <div style="margin-top:15px">
+        <label>Client First Name</label>
+        @Html.TextBoxFor(c => c.AD, new { @class = "form-control", placeholder = "Enter client first name...", required = "required" })
+        @Html.ValidationMessageFor(c => c.AD, "", new { @style = "color:red" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Client Last Name</label>
+        @Html.TextBoxFor(c => c.SOYAD, new { @class = "form-control", placeholder = "Enter client last name...", required = "required" })
+        @Html.ValidationMessageFor(c => c.SOYAD, "", new { @style = "color:red" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Client Mail</label>
+        @Html.TextBoxFor(c => c.MAIL, new { @class = "form-control", placeholder = "Enter client mail...", required = "required" })
+        @Html.ValidationMessageFor(c => c.MAIL, "", new { @style = "color:red" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Client User Name</label>
+        @Html.TextBoxFor(c => c.KULLANICIADI, new { @class = "form-control", placeholder = "Enter client user name...", required = "required" })
+        @Html.ValidationMessageFor(c => c.KULLANICIADI, "", new { @style = "color:red" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Client Password</label>
+        @Html.Password("SIFRE", "", new { value = "SIFRE", Textmode = "Password", @class = "form-control", required = "required", placeholder = "client password..." })
+        @Html.ValidationMessageFor(c => c.SIFRE, "", new { @style = "color:red" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Client Phone Number</label>
+        @Html.TextBoxFor(c => c.TELEFON, new { @class = "form-control", placeholder = "Enter client phone number...", required = "required" })
+        @Html.ValidationMessageFor(c => c.TELEFON, "", new { @style = "color:red" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Gender</label><br />
+        @Html.RadioButtonFor(c => c.CINSIYET, true)
+        @Html.Label("Male")
+        @Html.RadioButtonFor(c => c.CINSIYET, false)
+        @Html.Label("Female")
+        @Html.ValidationMessageFor(c => c.CINSIYET, "", new { @style = "color:red" })
+    </div>
+    <div style="margin-top:15px">
+        <button class="btn add"><i class="fas fa-plus"></i>&nbsp; Add Client</button>
+    </div>
+
+}
+

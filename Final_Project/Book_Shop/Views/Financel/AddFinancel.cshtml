@@ -1,0 +1,24 @@
+﻿@model Book_Shop.Models.Entity.KASA
+@{
+    ViewBag.Title = "Add Case";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+
+@using (Html.BeginForm("AddFinancel", "Financel", FormMethod.Post))
+{
+<div class="form-group" style="margin-top:15px">
+    <label>Month and year</label>
+    @Html.TextBoxFor(f => f.AYVEYIL, new { @class = "form-control", placeholder = "Month and Year...", required = "required" })
+    @Html.ValidationMessageFor(e => e.AYVEYIL, "", new { @style = "color:red" })
+    <br />
+    <label>Total amount at case</label>
+    @Html.TextBoxFor(e => e.TUTAR, new { @class = "form-control", placeholder = "Total amount...", required = "required" })
+    @Html.ValidationMessageFor(e => e.TUTAR, "", new { @style = "color:red" })
+    <br />
+</div>
+    <div style="margin-top:10px">
+        <button class="btn add"><i class="fas fa-plus"></i>&nbsp; Add New Case Record</button>
+    </div>
+}
+

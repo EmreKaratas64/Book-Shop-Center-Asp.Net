@@ -1,0 +1,59 @@
+﻿@model Book_Shop.Models.Entity.KITAPLAR
+@{
+    ViewBag.Title = "Update Book";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+@using (Html.BeginForm("UpdateBook", "Book", FormMethod.Post))
+{
+    <div style="margin-top:15px">
+        <label>Book ID</label>
+        @Html.TextBoxFor(k => k.ID, new { @class = "form-control" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Book Name</label>
+        @Html.TextBoxFor(k => k.AD, new { @class = "form-control", required = "required" })
+        @Html.ValidationMessageFor(c => c.AD, "", new { @style = "color:red" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Book Category</label>
+        @Html.DropDownListFor(k => k.KATEGORI, (List<SelectListItem>)ViewBag.cat, new { @class = "form-control", required = "required" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Book Author</label>
+        @Html.DropDownListFor(k => k.YAZAR, (List<SelectListItem>)ViewBag.aut, new { @class = "form-control", required = "required" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Unit Price</label>
+        @Html.TextBoxFor(k => k.FIYAT, new { @class = "form-control", required = "required" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Publish Year</label>
+        @Html.TextBoxFor(k => k.BASIMYIL, new { @class = "form-control", required = "required" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Number Of Pages</label>
+        @Html.TextBoxFor(k => k.SAYFA, new { @class = "form-control", required = "required" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Publisher</label>
+        @Html.TextBoxFor(k => k.YAYINEVI, new { @class = "form-control", required = "required" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Book Stock</label>
+        @Html.TextBoxFor(k => k.STOK, new { @class = "form-control", required = "required" })
+        @Html.ValidationMessageFor(c => c.STOK, "", new { @style = "color:red" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Book Image</label>
+        @Html.TextBoxFor(k => k.KITAPRESIM, new { @class = "form-control", required = "required" })
+        @Html.ValidationMessageFor(k => k.KITAPRESIM, "", new { @style = "color:red" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Book Summary</label>
+        @Html.TextAreaFor(k => k.KITAPOZET, new { @class = "form-control", @rows = 8, required = "required" })
+    </div>
+    <div style="margin-top:15px">
+        <button class="btn btn-warning"><i class="glyphicon glyphicon-edit"></i>&nbsp; Update Book</button>
+    </div>
+}

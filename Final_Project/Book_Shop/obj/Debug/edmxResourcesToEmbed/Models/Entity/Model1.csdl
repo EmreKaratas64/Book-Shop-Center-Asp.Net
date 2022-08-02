@@ -1,0 +1,283 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBBookShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="DBBookShopEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="HAREKETLER" EntityType="DBBookShopModel.HAREKETLER" />
+    <EntitySet Name="KATEGORILER" EntityType="DBBookShopModel.KATEGORILER" />
+    <EntitySet Name="KITAPLAR" EntityType="DBBookShopModel.KITAPLAR" />
+    <EntitySet Name="MUSTERILER" EntityType="DBBookShopModel.MUSTERILER" />
+    <EntitySet Name="PERSONELLER" EntityType="DBBookShopModel.PERSONELLER" />
+    <EntitySet Name="sysdiagrams" EntityType="DBBookShopModel.sysdiagrams" />
+    <EntitySet Name="YAZARLAR" EntityType="DBBookShopModel.YAZARLAR" />
+    <AssociationSet Name="FK_HAREKET_KITAP1" Association="DBBookShopModel.FK_HAREKET_KITAP1">
+      <End Role="KITAPLAR" EntitySet="KITAPLAR" />
+      <End Role="HAREKETLER" EntitySet="HAREKETLER" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HAREKET_MUSTERI1" Association="DBBookShopModel.FK_HAREKET_MUSTERI1">
+      <End Role="MUSTERILER" EntitySet="MUSTERILER" />
+      <End Role="HAREKETLER" EntitySet="HAREKETLER" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KITAP_KATEGORI1" Association="DBBookShopModel.FK_KITAP_KATEGORI1">
+      <End Role="KATEGORILER" EntitySet="KATEGORILER" />
+      <End Role="KITAPLAR" EntitySet="KITAPLAR" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KITAP_YAZAR1" Association="DBBookShopModel.FK_KITAP_YAZAR1">
+      <End Role="YAZARLAR" EntitySet="YAZARLAR" />
+      <End Role="KITAPLAR" EntitySet="KITAPLAR" />
+    </AssociationSet>
+    <EntitySet Name="KASA" EntityType="DBBookShopModel.KASA" />
+    <AssociationSet Name="FK_HAREKETLER_KASA" Association="DBBookShopModel.FK_HAREKETLER_KASA">
+      <End Role="KASA" EntitySet="KASA" />
+      <End Role="HAREKETLER" EntitySet="HAREKETLER" />
+    </AssociationSet>
+    <EntitySet Name="TBLILETISIM" EntityType="DBBookShopModel.TBLILETISIM" />
+    <EntitySet Name="TBLMESAJLAR" EntityType="DBBookShopModel.TBLMESAJLAR" />
+    <EntitySet Name="TBLDUYURULAR" EntityType="DBBookShopModel.TBLDUYURULAR" />
+    <EntitySet Name="ADMINLER" EntityType="DBBookShopModel.ADMINLER" />
+    <EntitySet Name="KITAPYORUM" EntityType="DBBookShopModel.KITAPYORUM" />
+    <AssociationSet Name="FK_KITAPYORUM_MUSTERILER" Association="DBBookShopModel.FK_KITAPYORUM_MUSTERILER">
+      <End Role="MUSTERILER" EntitySet="MUSTERILER" />
+      <End Role="KITAPYORUM" EntitySet="KITAPYORUM" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KITAPYORUM_KITAPLAR" Association="DBBookShopModel.FK_KITAPYORUM_KITAPLAR">
+      <End Role="KITAPLAR" EntitySet="KITAPLAR" />
+      <End Role="KITAPYORUM" EntitySet="KITAPYORUM" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="HAREKETLER">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KITAP" Type="Int32" />
+    <Property Name="MUSTERI" Type="Int32" />
+    <Property Name="BIRIMFIYAT" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ADET" Type="Int32" />
+    <Property Name="TUTAR" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="TARIH" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="KITAPLAR" Relationship="DBBookShopModel.FK_HAREKET_KITAP1" FromRole="HAREKETLER" ToRole="KITAPLAR" />
+    <NavigationProperty Name="MUSTERILER" Relationship="DBBookShopModel.FK_HAREKET_MUSTERI1" FromRole="HAREKETLER" ToRole="MUSTERILER" />
+    <Property Name="KASAID" Type="Int32" />
+    <NavigationProperty Name="KASA" Relationship="DBBookShopModel.FK_HAREKETLER_KASA" FromRole="HAREKETLER" ToRole="KASA" />
+  </EntityType>
+  <EntityType Name="KATEGORILER">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AD" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="KITAPLAR" Relationship="DBBookShopModel.FK_KITAP_KATEGORI1" FromRole="KATEGORILER" ToRole="KITAPLAR" />
+    <Property Name="DURUM" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="KITAPLAR">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AD" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="KATEGORI" Type="Byte" />
+    <Property Name="YAZAR" Type="Int16" />
+    <Property Name="BASIMYIL" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+    <Property Name="SAYFA" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="YAYINEVI" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="STOK" Type="Int32" />
+    <Property Name="KITAPRESIM" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="HAREKETLER" Relationship="DBBookShopModel.FK_HAREKET_KITAP1" FromRole="KITAPLAR" ToRole="HAREKETLER" />
+    <NavigationProperty Name="KATEGORILER" Relationship="DBBookShopModel.FK_KITAP_KATEGORI1" FromRole="KITAPLAR" ToRole="KATEGORILER" />
+    <NavigationProperty Name="YAZARLAR" Relationship="DBBookShopModel.FK_KITAP_YAZAR1" FromRole="KITAPLAR" ToRole="YAZARLAR" />
+    <Property Name="KITAPOZET" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+    <Property Name="DURUM" Type="Boolean" />
+    <Property Name="FIYAT" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="KITAPYORUM" Relationship="DBBookShopModel.FK_KITAPYORUM_KITAPLAR" FromRole="KITAPLAR" ToRole="KITAPYORUM" />
+  </EntityType>
+  <EntityType Name="MUSTERILER">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AD" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="SOYAD" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="MAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="KULLANICIADI" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="SIFRE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="FOTOGRAF" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="TELEFON" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="HAREKETLER" Relationship="DBBookShopModel.FK_HAREKET_MUSTERI1" FromRole="MUSTERILER" ToRole="HAREKETLER" />
+    <Property Name="DURUM" Type="Boolean" />
+    <Property Name="CINSIYET" Type="Boolean" />
+    <NavigationProperty Name="KITAPYORUM" Relationship="DBBookShopModel.FK_KITAPYORUM_MUSTERILER" FromRole="MUSTERILER" ToRole="KITAPYORUM" />
+  </EntityType>
+  <EntityType Name="PERSONELLER">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PERSONEL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DURUM" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="YAZARLAR">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="KITAPLAR" Relationship="DBBookShopModel.FK_KITAP_YAZAR1" FromRole="YAZARLAR" ToRole="KITAPLAR" />
+    <Property Name="DURUM" Type="Boolean" />
+  </EntityType>
+  <Association Name="FK_HAREKET_KITAP1">
+    <End Type="DBBookShopModel.KITAPLAR" Role="KITAPLAR" Multiplicity="0..1" />
+    <End Type="DBBookShopModel.HAREKETLER" Role="HAREKETLER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KITAPLAR">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="HAREKETLER">
+        <PropertyRef Name="KITAP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HAREKET_MUSTERI1">
+    <End Type="DBBookShopModel.MUSTERILER" Role="MUSTERILER" Multiplicity="0..1" />
+    <End Type="DBBookShopModel.HAREKETLER" Role="HAREKETLER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MUSTERILER">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="HAREKETLER">
+        <PropertyRef Name="MUSTERI" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KITAP_KATEGORI1">
+    <End Type="DBBookShopModel.KATEGORILER" Role="KATEGORILER" Multiplicity="0..1" />
+    <End Type="DBBookShopModel.KITAPLAR" Role="KITAPLAR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KATEGORILER">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="KITAPLAR">
+        <PropertyRef Name="KATEGORI" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KITAP_YAZAR1">
+    <End Type="DBBookShopModel.YAZARLAR" Role="YAZARLAR" Multiplicity="0..1" />
+    <End Type="DBBookShopModel.KITAPLAR" Role="KITAPLAR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="YAZARLAR">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="KITAPLAR">
+        <PropertyRef Name="YAZAR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="KASA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AYVEYIL" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="TUTAR" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="HAREKETLER" Relationship="DBBookShopModel.FK_HAREKETLER_KASA" FromRole="KASA" ToRole="HAREKETLER" />
+  </EntityType>
+  <Association Name="FK_HAREKETLER_KASA">
+    <End Type="DBBookShopModel.KASA" Role="KASA" Multiplicity="0..1" />
+    <End Type="DBBookShopModel.HAREKETLER" Role="HAREKETLER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KASA">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="HAREKETLER">
+        <PropertyRef Name="KASAID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="TBLILETISIM">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="KONU" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MESAJ" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="CEVAPLANDI" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="TBLMESAJLAR">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GONDEREN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ALICI" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="KONU" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ICERIK" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="TARIH" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="TBLDUYURULAR">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BASLIK" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ICERIK" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="TARIH" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="ADMINLER">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SIFRE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="YETKI" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="KITAPYORUM">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BASLIK" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ICERIK" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="MUSTERI" Type="Int32" />
+    <Property Name="TARIH" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="MUSTERILER" Relationship="DBBookShopModel.FK_KITAPYORUM_MUSTERILER" FromRole="KITAPYORUM" ToRole="MUSTERILER" />
+    <Property Name="KITAP" Type="Int32" />
+    <NavigationProperty Name="KITAPLAR" Relationship="DBBookShopModel.FK_KITAPYORUM_KITAPLAR" FromRole="KITAPYORUM" ToRole="KITAPLAR" />
+  </EntityType>
+  <Association Name="FK_KITAPYORUM_MUSTERILER">
+    <End Type="DBBookShopModel.MUSTERILER" Role="MUSTERILER" Multiplicity="0..1" />
+    <End Type="DBBookShopModel.KITAPYORUM" Role="KITAPYORUM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MUSTERILER">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="KITAPYORUM">
+        <PropertyRef Name="MUSTERI" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KITAPYORUM_KITAPLAR">
+    <End Type="DBBookShopModel.KITAPLAR" Role="KITAPLAR" Multiplicity="0..1" />
+    <End Type="DBBookShopModel.KITAPYORUM" Role="KITAPYORUM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KITAPLAR">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="KITAPYORUM">
+        <PropertyRef Name="KITAP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

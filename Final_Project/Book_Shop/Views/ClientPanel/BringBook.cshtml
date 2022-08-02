@@ -1,0 +1,214 @@
+﻿@using Book_Shop.Models.Entity;
+@model List<KITAPYORUM>
+@{
+    ViewBag.Title = "BringBook";
+    Layout = "~/Views/Shared/_LayoutClientPanel.cshtml";
+    string img_src = "";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Book Details</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body class="hold-transition sidebar-mini">
+    @if (TempData["CommentSuccess"] != null)
+    {
+    <div class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <h5><i class="icon fas fa-check"></i> Alert!</h5>
+        @TempData["CommentSuccess"]
+    </div>
+    }
+    <!-- Site wrapper -->
+    <div class="wrapper">
+        <!-- Main Sidebar Container -->
+        <!-- Content Wrapper. Contains page content -->
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Buy Book</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Buy-Book</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
+            <!-- Default box -->
+            <div class="card card-solid">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 col-sm-4">
+                            <h3 class="d-inline-block d-sm-none">@ViewBag.book_name</h3>
+                            <div class="col-12">
+                                <img src="@ViewBag.book_photo" class="product-image" alt="Product Image" style="width:400px;">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <h3 class="my-3">@ViewBag.book_name</h3>
+                            <p>@ViewBag.book_summary_part ...</p>
+                            <hr>
+                            <div class="bg-gray py-2 px-3 mt-5">
+                                <h2 class="mb-0">
+                                    @ViewBag.book_price ₺
+                                </h2>
+                            </div>
+
+                            <div class="mt-5">
+                                <a href="/ClientPanel/PuchaseBook/@ViewBag.book_id" class="btn btn-primary btn-lg btn-flat text-white">
+                                    <i class="far fa-credit-card"></i>&nbsp;
+                                    Buy
+                                </a>
+
+                                <div class="btn btn-default btn-lg btn-flat">
+                                    <i class="fas fa-heart fa-lg mr-2"></i>
+                                    Add to Wishlist
+                                </div>
+                            </div>
+
+                            <div class="mt-5 product-share">
+                                <a href="#" class="text-gray">
+                                    <i class="fab fa-facebook-square fa-2x"></i>
+                                </a>
+                                <a href="#" class="text-gray">
+                                    <i class="fab fa-twitter-square fa-2x"></i>
+                                </a>
+                                <a href="#" class="text-gray">
+                                    <i class="fas fa-envelope-square fa-2x"></i>
+                                </a>
+                                <a href="#" class="text-gray">
+                                    <i class="fas fa-rss-square fa-2x"></i>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <nav class="w-100">
+                            <div class="nav nav-tabs" id="product-tab" role="tablist">
+                                <a class="nav-item nav-link active" id="product-desc-tab" data-toggle="tab" href="#product-desc" role="tab" aria-controls="product-desc" aria-selected="true">Description</a>
+                                <a class="nav-item nav-link" id="product-comments-tab" data-toggle="tab" href="#product-comments" role="tab" aria-controls="product-comments" aria-selected="false">Comments</a>
+                            </div>
+                        </nav>
+                        <div class="tab-content p-3" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="product-desc" role="tabpanel" aria-labelledby="product-desc-tab"> @ViewBag.book_summary</div>
+                            <div class="tab-pane fade" id="product-comments" role="tabpanel" aria-labelledby="product-comments-tab">
+
+                                @foreach (var y in Model)
+                                {
+                                    if (y.MUSTERILER.CINSIYET == true)
+                                    {
+                                        img_src = "/AdminLTE-3.0.4/dist/img/avatar5.png";
+                                    }
+                                    else
+                                    {
+                                        img_src = "/AdminLTE-3.0.4/dist/img/avatar2.png";
+                                    }
+
+                                    <div class="post">
+
+                                        <div class="user-block">
+
+                                            <img class="img-circle img-bordered-sm" src="@img_src" alt="user image">
+
+                                            <span class="username">
+
+                                                <a href="#">@y.MUSTERILER.AD.ElementAt(0) *** @y.MUSTERILER.SOYAD.ElementAt(0) ***</a>
+
+                                                <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
+
+                                            </span>
+
+                                            <span class="description">@Convert.ToDateTime(y.TARIH).ToString("dd/MM/yyyy")</span>
+
+                                        </div>
+
+                                        <!-- /.user-block -->
+
+                                        <p>
+
+                                            @y.ICERIK
+                                        </p>
+
+
+                                        <p>
+
+                                            <a href="#" class="link-black text-sm mr-2"><i class="fas fa-share mr-1"></i> Share</a>
+
+                                            <a href="#" class="link-black text-sm"><i class="far fa-thumbs-up mr-1"></i> Like</a>
+
+
+                                        </p>
+
+                                        <input class="form-control form-control-sm" type="text" placeholder="Type a comment">
+
+                                    </div>
+                                }
+                                <br />
+                                <button class="btn btn-success text-white" data-toggle="modal" data-target="#Modal1"><i class="fas fa-comment"></i>&nbsp; Make Comment </button>
+
+                                <div class="modal" id="Modal1">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header bg-primary">
+                                                <h2 class="modal-title text-white">Make Comment</h2>
+                                            </div>
+                                            <form action="/ClientPanel/BringBook/" method="post">
+                                                <div class="modal-body">
+                                                    <label>Title</label>
+                                                    <input type="text" name="BASLIK" placeholder="title..." class="form-control" required />
+
+
+                                                    <input value="@ViewBag.book_id" type="hidden" name="KITAP" class="form-control" required />
+                                                    <br />
+                                                    <label>Comment Content</label>
+                                                    <textarea name="ICERIK" rows="5" placeholder="comment content..." class="form-control" required></textarea>
+                                                    <br />
+                                                    <button type="submit" class="btn btn-outline-primary">Submit Comment</button>
+                                                </div>
+
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+        </section>
+        <!-- /.content -->
+    </div>
+
+
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+
+
+
+    <!-- jQuery -->
+    <script src="~/AdminLTE-3.0.4/plugins/jquery/jquery.min.js"></script>
+</body>
+</html>
+
+

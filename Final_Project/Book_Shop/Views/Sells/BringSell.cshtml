@@ -1,0 +1,54 @@
+﻿@model Book_Shop.Models.Entity.HAREKETLER
+@{
+    ViewBag.Title = "Update Sell";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+@using (Html.BeginForm("UpdateSell", "Sells", FormMethod.Post))
+{
+    <div style="margin-top:15px">
+        <label>Sell ID</label>
+        @Html.TextBoxFor(h => h.ID, new { @class = "form-control" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Book ID</label>
+        @Html.DropDownListFor(h => h.KITAP, (List<SelectListItem>)ViewBag.bk, new { @class = "form-control", required = "required" })
+        @Html.ValidationMessageFor(h => h.KITAP, "", new { @style = "color:red" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Client ID</label>
+        @Html.DropDownListFor(h => h.MUSTERI, (List<SelectListItem>)ViewBag.cl, new { @class = "form-control", required = "required" })
+        @Html.ValidationMessageFor(h => h.MUSTERI, "", new { @style = "color:red" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Unit Price</label>
+        @Html.TextBoxFor(h => h.BIRIMFIYAT, new { @class = "form-control", required = "required" })
+        @Html.ValidationMessageFor(h => h.BIRIMFIYAT, "", new { @style = "color:red" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Amount</label>
+        @Html.TextBoxFor(h => h.ADET, new { @class = "form-control", required = "required" })
+        @Html.ValidationMessageFor(h => h.ADET, "", new { @style = "color:red" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Total Price</label>
+        @Html.TextBoxFor(h => h.TUTAR, new { @class = "form-control", required = "required" })
+        @Html.ValidationMessageFor(h => h.TUTAR, "", new { @style = "color:red" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Date</label>
+        @Html.TextBoxFor(h => h.TARIH, "{0:dd.MM.yyyy}", new { @class = "form-control", required = "required" })
+        @Html.ValidationMessageFor(h => h.TARIH,"", new { @style = "color:red" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Case ID</label>
+        @Html.TextBoxFor(h=>h.KASAID,new {@class="form-control", required = "required" })
+        @Html.ValidationMessageFor(h=>h.KASAID,"",new {@style="color:red"})
+    </div>
+    <div style="margin-top:15px">
+        <button class="btn btn-warning"><i class="glyphicon glyphicon-edit"></i>&nbsp; Update Sell</button>
+    </div>
+
+}
+
+

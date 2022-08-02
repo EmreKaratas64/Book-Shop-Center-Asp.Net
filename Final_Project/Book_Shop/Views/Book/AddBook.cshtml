@@ -1,0 +1,57 @@
+﻿@model Book_Shop.Models.Entity.KITAPLAR
+@{
+    ViewBag.Title = "Add Book";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2>Add Book</h2>
+
+<form class="form form-group" method="post">
+    <div style="margin-top:15px">
+        <label>Book Name</label>
+        @Html.TextBoxFor(k => k.AD, new { @class = "form-control", placeholder = "Enter book name...", required = "required" })
+        @Html.ValidationMessageFor(k => k.AD, "", new { @style = "color:red" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Book Category</label>
+        @Html.DropDownListFor(k => k.KATEGORI, (List<SelectListItem>)ViewBag.cat, new { @class = "form-control", required = "required" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Book Author</label>
+        @Html.DropDownListFor(k => k.YAZAR, (List<SelectListItem>)ViewBag.aut, new { @class = "form-control", required = "required" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Unit Price</label>
+        @Html.TextBoxFor(k => k.FIYAT, new { @class = "form-control", placeholder = "Enter unit price...", required = "required" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Publish Year</label>
+        @Html.TextBoxFor(k => k.BASIMYIL, new { @class = "form-control", placeholder = "Enter publish year...", required = "required" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Number Of Pages</label>
+        @Html.TextBoxFor(k => k.SAYFA, new { @class = "form-control", placeholder = "Enter number of pages...", required = "required" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Publisher</label>
+        @Html.TextBoxFor(k => k.YAYINEVI, new { @class = "form-control", placeholder = "Enter publisher...", required = "required" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Book Stock</label>
+        @Html.TextBoxFor(k => k.STOK, new { @class = "form-control", placeholder = "Enter book stock...", required = "required" })
+        @Html.ValidationMessageFor(k => k.STOK, "", new { @style = "color:red" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Book Image</label>
+        @Html.TextBoxFor(k => k.KITAPRESIM, new { @class = "form-control", placeholder = "book image link...", required = "required" })
+        @Html.ValidationMessageFor(k => k.KITAPRESIM, "", new { @style = "color:red" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Book Summary</label>
+        @Html.TextAreaFor(k => k.KITAPOZET, new { @class = "form-control", placeholder = "Enter book summary...", @rows = 8, required = "required" })
+    </div>
+    <div style="margin-top:15px">
+        <button class="btn add"><i class="fas fa-plus"></i>&nbsp; Add Book</button>
+    </div>
+</form>
+

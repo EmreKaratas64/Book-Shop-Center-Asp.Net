@@ -1,0 +1,65 @@
+﻿@using Book_Shop.Models.Entity
+@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<HAREKETLER>
+@{
+    ViewBag.Title = "Sells";
+    Layout = "~/Views/Shared/Layout.cshtml";
+    DateTime due = DateTime.Now;
+}
+
+@if (TempData["SellDeleteSuccessful"] != null)
+{
+    <div class="alert alert-dismissible" style="background: #ffc107">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <h5><i class="icon fas fa-exclamation-triangle"></i>&nbsp; Alert!</h5>
+        @TempData["SellDeleteSuccessful"]
+    </div>
+}
+
+<br />
+<table class="table table-striped">
+    <tr style="background-color: #0e63ea; color: white;">
+        <td>ID</td>
+        <td>BOOK</td>
+        <td>CLIENT NAME</td>
+        <td>CLIENT LASTNAME</td>
+        <td>UNIT PRICE</td>
+        <td>AMOUNT</td>
+        <td>TOTAL PRICE</td>
+        <td>DATE</td>
+        <td>CASE ID</td>
+        <td>DELETE</td>
+        <td>UPDATE SELL</td>
+    </tr>
+
+    @foreach (var h in Model)
+    {
+        due = DateTime.Parse(h.TARIH.ToString()).AddDays(4);
+        <tr>
+            <td>@h.ID</td>
+            <td>@h.KITAPLAR.AD</td>
+            <td>@h.MUSTERILER.AD</td>
+            <td>@h.MUSTERILER.SOYAD</td>
+            <td>@h.BIRIMFIYAT ₺</td>
+            <td>@h.ADET</td>
+            <td>@h.TUTAR ₺</td>
+            <td>@Convert.ToDateTime(h.TARIH).ToString("dd/MM/yyyy")</td>
+            <td>@h.KASAID</td>
+            <td>
+                @if (DateTime.Now >= due)
+                {
+                    <a href="/Sells/DeleteSell/@h.ID" class="btn btn-danger">Must be deleted due to dead due date</a>
+                }
+                else
+                {
+                    <a href="/Sells/DeleteSell/@h.ID" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i>&nbsp; Delete</a>
+                }
+            </td>
+            <td><a href="/Sells/BringSell/@h.ID" class="btn btn-warning"><i class="glyphicon glyphicon-edit"></i>&nbsp; Update</a></td>
+        </tr>
+    }
+
+</table>
+@Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("Index", new { sayfa }))
+

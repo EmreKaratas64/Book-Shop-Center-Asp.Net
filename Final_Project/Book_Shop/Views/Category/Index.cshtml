@@ -1,0 +1,31 @@
+﻿@using Book_Shop.Models.Entity;
+@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<KATEGORILER>
+
+@{
+    ViewBag.Title = "Category";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<br />
+
+<table class="table table-striped">
+    <tr style="background-color: #0e63ea; color: white;">
+        <td>CATEGORY ID</td>
+        <td>CATEGORY NAME</td>
+        <td>DELETE CATEGORY</td>
+        <td>UPDATE CATEGORY</td>
+    </tr>
+    @foreach (var c in Model)
+    {
+        <tr>
+            <td>@c.ID</td>
+            <td>@c.AD</td>
+            <td><a href="/Category/DeleteCategory/@c.ID" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i>&nbsp; Delete</a></td>
+            <td><a href="/Category/BringCategory/@c.ID" class="btn btn-warning"><i class="glyphicon glyphicon-edit"></i>&nbsp; Update</a></td>
+        </tr>
+    }
+</table>
+@Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("Index", new { sayfa }))
+<a href="/Category/AddCategory/" class="btn add"><i class="fas fa-plus"></i>&nbsp; Add Category</a>

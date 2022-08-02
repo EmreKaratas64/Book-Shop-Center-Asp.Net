@@ -1,0 +1,81 @@
+﻿@model Book_Shop.Models.Entity.HAREKETLER
+@{
+    ViewBag.Title = "Puchase Book";
+    Layout = "~/Views/Shared/_LayoutClientPanel.cshtml";
+}
+
+@if (TempData["PurchaseFailed"] != null)
+{
+    <div class="alert alert-dismissible" style="background: #dc3545; color:white">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <h5><i class="icon fas fa-ban"></i> Alert!</h5>
+        @TempData["PurchaseFailed"]
+    </div>
+}
+
+
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+                <!-- jquery validation -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Book Shop Center <small>Purchase Form</small></h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    @using (Html.BeginForm("AddSell", "ClientPanel", FormMethod.Post))
+                    {
+                        <form>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="KITAP" value="@ViewBag.kitap_id" required hidden />
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="MUSTERI" value="@ViewBag.mus_id" required hidden />
+                                </div>
+                                <div class="form-group">
+                                    <label>Book</label>
+                                    <input type="text" class="form-control" placeholder="book name" value="@ViewBag.kitap_ad">
+                                </div>
+                                <div class="form-group">
+                                    <label>Unit Price</label>
+                                    <input type="text" class="form-control" name="BIRIMFIYAT" placeholder="unit price" value="@ViewBag.birim_fiy" required />
+                                </div>
+                                <div class="form-group">
+                                    <label>Amount</label>
+                                    <input type="text" class="form-control" name="ADET" placeholder="amount" required />
+                                </div>
+                                <div class="form-group mb-0">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" name="terms" class="custom-control-input" id="exampleCheck1" , required>
+                                        <label class="custom-control-label" for="exampleCheck1">I agree to the <a href="#">terms of service</a>.</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-credit-card"></i>&nbsp; Go To Payment</button>
+                            </div>
+                        </form>
+                    }
+                </div>
+                <!-- /.card -->
+            </div>
+            <!--/.col (left) -->
+            <!-- right column -->
+            <div class="col-md-6">
+
+            </div>
+            <!--/.col (right) -->
+        </div>
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
+</section>
+
+
+<!-- jQuery -->
+<script src="~/AdminLTE-3.0.4/plugins/jquery/jquery.min.js"></script>

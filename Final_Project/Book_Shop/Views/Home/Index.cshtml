@@ -1,0 +1,166 @@
+﻿@model Book_Shop.Models.MyClasses.Class1
+@{
+    Layout = null;
+    string img_class = "", text_class = "";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Book Shop Center Home</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="~/Moderna/assets/img/favicon.png" rel="icon">
+    <link href="~/Moderna/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,700,700i&display=swap" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="~/Moderna/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+    <link href="~/Moderna/assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="~/Moderna/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Moderna/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="~/Moderna/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="~/Moderna/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="~/Moderna/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
+
+    <!-- Template Main CSS File -->
+    <link href="~/Moderna/assets/css/style.css" rel="stylesheet">
+
+    <!-- =======================================================
+    * Template Name: Moderna - v4.8.0
+    * Template URL: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/
+    * Author: BootstrapMade.com
+    * License: https://bootstrapmade.com/license/
+    ======================================================== -->
+</head>
+
+<body>
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-center header-transparent">
+        <div class="container d-flex justify-content-between align-items-center">
+
+            <div class="logo">
+                <h1 class="text-light"><a href="/Home/Index/"><span>Book Shop Center</span></a></h1>
+            </div>
+
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li><a class="active " href="/Home/Index/">Home</a></li>
+                    <li><a href="/Home/ContactUs">Contact Us</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+
+        </div>
+    </header><!-- End Header -->
+
+    <!-- ======= Hero Section ======= -->
+    <section id="hero" class="d-flex justify-cntent-center align-items-center">
+        <div id="heroCarousel" class="container carousel carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+
+            <div class="carousel-item active">
+                <div class="carousel-container">
+                    <h2 class="animate__animated animate__fadeInDown">Welcome to <span>Book Shop Center</span></h2>
+                    <p class="animate__animated animate__fadeInUp">Book Shop Center is book market for both commercial compaines who sells books and individual readers. Books can be delivered most of the cities and countrires however delivery payment changes based on purchase amount. We always ready to help if you have any problem and we always welcome you to visit our website</p>
+                    <a href="/Login/SignIn" class="btn-get-started animate__animated animate__fadeInUp">Client Login</a>
+                </div>
+            </div>
+        </div>
+    </section><!-- End Hero -->
+    <!-- ======= Features Section ======= -->
+    <section class="features">
+        <div class="container">
+
+            <div class="section-title">
+                <h2>Books</h2>
+                <p>There are some popular books are shown below with their summaries.</p>
+            </div>
+
+            @foreach (var k in Model.Kitaplar)
+            {
+                if (k.ID == 1)
+                {
+                    img_class = "col-md-5";
+                    text_class = "col-md-7 pt-4";
+                }
+                else if (k.ID % 2 == 0)
+                {
+                    img_class = "col-md-5 order-1 order-md-2";
+                    text_class = "col-md-7 pt-5 order-2 order-md-1";
+                }
+                else if (k.ID % 2 == 1)
+                {
+                    img_class = "col-md-5";
+                    text_class = "col-md-7 pt-5";
+                }
+                if (k.ID > 15)
+                {
+                    break;
+                }
+                <div class="row" data-aos="fade-up">
+                    <div class="@img_class">
+                        <img src="@k.KITAPRESIM" class="img-fluid" alt="" style="margin-bottom:15px; margin-top:15px">
+                    </div>
+                    <div class="@text_class" style="margin-bottom:15px; margin-top:15px">
+                        <h3>@k.AD</h3>
+                        <p class="fst-italic">
+                            @k.KITAPOZET
+                        </p>
+                    </div>
+                </div>
+            }
+
+
+        </div>
+    </section><!-- End Features Section -->
+    <!-- ======= Footer ======= -->
+    <footer id="footer" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
+
+        <div class="container">
+            <div class="copyright">
+                &copy; Copyright <strong><span>Moderna</span></strong>. Book Shop Center All Rights Reserved
+            </div>
+            <div class="credits">
+                <!-- All the links in the footer should remain intact. -->
+                <!-- You can delete the links only if you purchased the pro version. -->
+                <!-- Licensing information: https://bootstrapmade.com/license/ -->
+                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/ -->
+                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+
+                <div class="social-links mt-3">
+                    <a href="#" class="twitter" style="font-size:24px"><i class="bx bxl-twitter"></i></a>
+                    <a href="#" class="facebook" style="font-size:24px"><i class="bx bxl-facebook"></i></a>
+                    <a href="#" class="instagram" style="font-size:24px"><i class="bx bxl-instagram"></i></a>
+                    <a href="#" class="linkedin" style="font-size:24px"><i class="bx bxl-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script src="~/Moderna/assets/vendor/purecounter/purecounter.js"></script>
+    <script src="~/Moderna/assets/vendor/aos/aos.js"></script>
+    <script src="~/Moderna/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Moderna/assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="~/Moderna/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="~/Moderna/assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="~/Moderna/assets/vendor/waypoints/noframework.waypoints.js"></script>
+    <script src="~/Moderna/assets/vendor/php-email-form/validate.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="~/Moderna/assets/js/main.js"></script>
+
+</body>
+
+</html>

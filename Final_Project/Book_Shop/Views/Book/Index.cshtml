@@ -1,0 +1,56 @@
+﻿@using Book_Shop.Models.Entity;
+@using PagedList;
+@using PagedList.Mvc;
+@model PagedList<KITAPLAR>
+@{
+    ViewBag.Title = "Books";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<br />
+
+@using (Html.BeginForm("Index", "Book", FormMethod.Get))
+{
+    <div style="margin-bottom:15px">
+        @Html.TextBox("p", "", new { @class = "form-control", placeholder = "Enter a book name to be searched..." })
+        <input type="submit" value="Search" class="btn btn-info" style="margin-top:10px" />
+    </div>
+
+}
+
+<br />
+
+<table class="table table-striped">
+    <tr style="background-color: #0e63ea; color: white;">
+        <td>BOOK ID</td>
+        <td>BOOK NAME</td>
+        <td>BOOK CATEGORY</td>
+        <td>BOOK AUTHOR</td>
+        <td>UNIT PRICE</td>
+        <td>PUBLISHER</td>
+        <td>STOCK</td>
+        <td>DELETE BOOK</td>
+        <td>UPDATE BOOK</td>
+    </tr>
+
+    @foreach (var b in Model)
+    {
+        <tr>
+            <td>@b.ID</td>
+            <td>@b.AD</td>
+            <td>@b.KATEGORILER.AD</td>
+            <td>@b.YAZARLAR.AD</td>
+            <td>@b.FIYAT ₺</td>
+            <td>@b.YAYINEVI</td>
+            <td>@b.STOK</td>
+            <td><a href="/Book/DeleteBook/@b.ID" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i>&nbsp; Delete</a></td>
+            <td><a href="/Book/BringBook/@b.ID" class="btn btn-warning"><i class="glyphicon glyphicon-edit"></i>&nbsp; Update</a></td>
+        </tr>
+    }
+
+</table>
+@Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("Index", new { sayfa }))
+<a href="/Book/AddBook/" class="btn add"><i class="fas fa-plus"></i>&nbsp; Add Book</a>
+<br /><br />
+<a href="/Book/BooksDetail/" class="btn" style="background: #39424c; color: white; padding: 8px"><i class="fas fa-angle-double-right"></i>&nbsp; Details Page</a>
+

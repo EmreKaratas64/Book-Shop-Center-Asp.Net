@@ -1,0 +1,39 @@
+﻿@using Book_Shop.Models.Entity
+@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<MUSTERILER>
+@{
+    ViewBag.Title = "Clients";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<br />
+<table class="table table-striped">
+    <tr style="background-color: #0e63ea; color: white;">
+        <td>CLIENT ID</td>
+        <td>CLIENT FIRST NAME</td>
+        <td>CLIENT LAST NAME</td>
+        <td>CLIENT MAIL</td>
+        <td>CLIENT USER NAME</td>
+        <td>CLIENT PHON NUMBER</td>
+        <td>DELETE CLIENT</td>
+        <td>UPDATE CLIENT</td>
+        <td>PURCHASE HISTORY</td>
+    </tr>
+    @foreach (var c in Model)
+    {
+        <tr>
+            <td>@c.ID</td>
+            <td>@c.AD</td>
+            <td>@c.SOYAD</td>
+            <td>@c.MAIL</td>
+            <td>@c.KULLANICIADI</td>
+            <td>@c.TELEFON</td>
+            <td><a href="/Client/DeleteClient/@c.ID" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i>&nbsp; Delete</a></td>
+            <td><a href="/Client/BringClient/@c.ID" class="btn btn-warning"><i class="glyphicon glyphicon-edit"></i>&nbsp; Update</a></td>
+            <td><a href="/Client/PurchaseHistory/@c.ID" class="btn btn-info"><i class="fas fa-credit-card"></i>&nbsp; Purchase History</a></td>
+        </tr>
+    }
+</table>
+@Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("Index", new { sayfa }))
+<a href="/Client/AddClient/" class="btn add"><i class="fas fa-plus"></i>&nbsp; Add Client</a>

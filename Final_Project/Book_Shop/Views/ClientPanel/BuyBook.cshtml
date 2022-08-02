@@ -1,0 +1,96 @@
+﻿@using Book_Shop.Models.Entity;
+@model List<KITAPLAR>
+@{
+    ViewBag.Title = "BuyBook";
+    Layout = "~/Views/Shared/_LayoutClientPanel.cshtml";
+    int kitap_id = 0;
+}
+
+<style>
+    .card {
+        display: inline-flex;
+        max-width: 535px;
+        margin-right: 8px;
+    }
+
+    @@media screen and (min-width: 1814px) {
+        .card {
+            max-width: 495px;
+        }
+    }
+
+
+    @@media screen and (max-width: 1814px) {
+        .card {
+            max-width: 700px;
+        }
+    }
+
+    @@media screen and (max-width: 1717px) {
+        .card {
+            max-width: 600px;
+        }
+    }
+
+    @@media screen and (max-width: 1517px) {
+        .card {
+            max-width: 550px;
+        }
+    }
+
+    @@media screen and (max-width: 1417px) {
+        .card {
+            max-width: 520px;
+        }
+    }
+
+    @@media screen and (max-width: 1357px) {
+        .card {
+            max-width: 495px;
+        }
+    }
+
+    @@media screen and (max-width: 1307px) {
+        .card {
+            max-width: 650px;
+        }
+    }
+
+    @@media screen and (max-width: 767px) {
+        .card {
+            max-width: 280px;
+            margin-left: 5px;
+        }
+    }
+
+    @@media screen and (max-width: 637px) {
+        .card {
+            max-width: 360px;
+            margin-left: 25px;
+        }
+    }
+</style>
+
+@foreach (var k in Model)
+{
+    kitap_id = k.ID;
+    <div class="card mb-3">
+        <div class="row no-gutters">
+            <div class="col-md-4">
+                <img src="@k.KITAPRESIM" class="card-img" alt="Book">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title text-bold">@k.AD</h5>
+                    <p class="card-text">
+                        @k.KITAPOZET.Substring(0, 190) ...
+                    </p>
+
+                    <a href="/ClientPanel/BringBook/@k.ID" style="float:right" class="btn btn-primary text-white"><i class="fas fa-eye"></i>&nbsp; View</a>
+                    <small class="text-muted">Last updated 3 mins ago</small>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,315 @@
+﻿
+@{
+    ViewBag.Title = "Client Profile";
+    Layout = "~/Views/Shared/_LayoutClientPanel.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Tell the browser to be responsive to screen width -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet" href="~/AdminLTE-3.0.4/plugins/fontawesome-free/css/all.min.css">
+
+    <!-- Ionicons -->
+
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+    <!-- Theme style -->
+
+    <link rel="stylesheet" href="~/AdminLTE-3.0.4/dist/css/adminlte.min.css">
+
+    <!-- Google Font: Source Sans Pro -->
+
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+</head>
+
+<body class="hold-transition sidebar-mini" style="font-size:18px">
+
+    <!-- Navbar -->
+    <!-- Content Wrapper. Contains page content -->
+    <!-- Content Header (Page header) -->
+
+    <section class="content-header">
+
+        <div class="container-fluid">
+
+            <div class="row mb-2">
+
+                <div class="col-sm-6">
+
+                    <h1>My Profile</h1>
+
+                </div>
+
+                <div class="col-sm-6">
+
+                    <ol class="breadcrumb float-sm-right">
+
+                        <li class="breadcrumb-item"><a href="/Home/Index/">Home</a></li>
+
+                        <li class="breadcrumb-item active">User Profile</li>
+
+                    </ol>
+
+                </div>
+
+            </div>
+
+        </div><!-- /.container-fluid -->
+
+    </section>
+
+
+
+    <!-- Main content -->
+
+    <section class="content">
+
+        <div class="container-fluid">
+
+            <div class="row">
+
+                <div class="col-md-3">
+
+
+
+                    <!-- Profile Image -->
+
+                    <div class="card card-primary card-outline">
+
+                        <div class="card-body box-profile">
+
+                            <div class="text-center">
+
+                                <img class="profile-user-img img-fluid img-circle"
+                                     src="@Session["FOTOGRAF"]"
+                                     alt="User profile picture">
+
+                            </div>
+
+
+
+                            <h3 class="profile-username text-center">@ViewBag.ad_soyad</h3>
+
+
+
+                            <p class="text-muted text-center">Client</p>
+
+
+
+                            <ul class="list-group list-group-unbordered mb-3">
+
+                                <li class="list-group-item">
+
+                                    <b>Bought Books</b> <a class="float-right">@ViewBag.boughts</a>
+
+                                </li>
+
+                                <li class="list-group-item">
+
+                                    <b>Received Messages</b> <a class="float-right">@ViewBag.rcmessages</a>
+
+                                </li>
+
+                                <li class="list-group-item">
+
+                                    <b>Notifications</b> <a class="float-right">@ViewBag.notifications</a>
+
+                                </li>
+
+                            </ul>
+
+
+
+                            <a href="/Messages/Index/" class="btn btn-primary btn-block"><b>Go To Inbox</b></a>
+
+                        </div>
+
+                        <!-- /.card-body -->
+
+                    </div>
+
+                    <!-- /.card -->
+                    <!-- About Me Box -->
+
+                    <div class="card card-primary">
+
+                        <div class="card-header">
+
+                            <h3 class="card-title">About Me</h3>
+
+                        </div>
+
+                        <!-- /.card-header -->
+
+                        <div class="card-body">
+
+                            <strong><i class="fas fa-list"></i>&nbsp; Hobbies</strong>
+
+
+
+                            <p class="text-muted">
+
+                                <span class="tag tag-danger">Reading Book</span>
+
+                                <span class="tag tag-success">Sky Diving</span>
+
+                                <span class="tag tag-info">Swiming</span>
+
+                                <span class="tag tag-warning">Table Tennis</span>
+
+                                <span class="tag tag-primary">Photoshop</span>
+
+                            </p>
+
+
+
+                            <hr>
+
+
+
+                            <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
+
+
+
+                            <p class="text-muted">New York, USA</p>
+
+
+
+                            <hr>
+
+
+
+                            <strong><i class="fas fa-envelope"></i>&nbsp; Mail</strong>
+
+
+
+                            <p class="text-muted">
+
+                                @ViewBag.mail
+
+                            </p>
+
+
+
+                            <hr>
+
+
+
+                            <strong><i class="fas fa-mobile"></i>&nbsp; Phone Number</strong>
+
+
+
+                            <p class="text-muted">
+                                @ViewBag.phone
+                            </p>
+
+                        </div>
+
+                        <!-- /.card-body -->
+
+                    </div>
+
+                    <!-- /.card -->
+
+                </div>
+
+                <!-- /.col -->
+
+                <div class="col-md-9">
+
+                    <div class="card">
+
+                        <div class="card-header p-2">
+
+                            <ul class="nav nav-pills">
+
+                                <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Notifications</a></li>
+
+
+
+                                <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Settings</a></li>
+
+                            </ul>
+
+                        </div><!-- /.card-header -->
+
+                        <div class="card-body">
+
+                            <div class="tab-content">
+
+                                <div class="active tab-pane" id="activity">
+
+                                  @Html.Partial("Partial1")
+
+                                </div>
+
+
+
+                                <div class="tab-pane" id="settings">
+
+                                   @Html.Action("Partial2", "ClientPanel")
+
+                                </div>
+
+                                <!-- /.tab-pane -->
+
+                            </div>
+
+                            <!-- /.tab-content -->
+
+                        </div><!-- /.card-body -->
+
+                    </div>
+
+                    <!-- /.nav-tabs-custom -->
+
+                </div>
+
+                <!-- /.col -->
+
+            </div>
+
+            <!-- /.row -->
+
+        </div><!-- /.container-fluid -->
+
+    </section>
+
+    <!-- /.content -->
+    <!-- /.content-wrapper -->
+
+
+
+    <!-- Control Sidebar -->
+
+    <aside class="control-sidebar control-sidebar-dark">
+
+        <!-- Control sidebar content goes here -->
+
+    </aside>
+
+    <!-- /.control-sidebar -->
+    <!-- ./wrapper -->
+    <!-- jQuery -->
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,21 @@
+﻿@model Book_Shop.Models.Entity.YAZARLAR
+@{
+    ViewBag.Title = "Update Author";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+@using (Html.BeginForm("UpdateAuthor", "Author", FormMethod.Post))
+{
+    <div class="form-group" style="margin-bottom:15px;margin-top:15px">
+        @Html.LabelFor(y => y.ID)
+        @Html.TextBoxFor(y => y.ID, new { @class = "form-control" })
+        <br />
+        <label>Name</label>
+        @Html.TextBoxFor(y => y.AD, new { @class = "form-control", required = "required"})
+        @Html.ValidationMessageFor(c => c.AD, "", new { @style = "color:red" })
+    </div>
+    <div>
+        <button class="btn btn-warning"><i class="glyphicon glyphicon-edit"></i>&nbsp; Update Author</button>
+    </div>
+}
+

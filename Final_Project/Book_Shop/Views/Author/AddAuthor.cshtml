@@ -1,0 +1,20 @@
+﻿@model Book_Shop.Models.Entity.YAZARLAR
+@{
+    ViewBag.Title = "Add Author";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2>Add Author</h2>
+
+@using (Html.BeginForm("AddAuthor", "Author", FormMethod.Post))
+{
+<div class="form-group" style="margin-bottom:15px;margin-top:15px">
+    <label>Author Name</label>
+    @Html.TextBoxFor(y => y.AD, new { @class = "form-control", placeholder = "Author name...", required = "required"})
+    @Html.ValidationMessageFor(c => c.AD, "", new { @style = "color:red" })
+</div>
+    <div>
+        <button class="btn add"><i class="fas fa-plus"></i>&nbsp; Add Author</button>
+    </div>
+}
+

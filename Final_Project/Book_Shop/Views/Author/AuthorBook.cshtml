@@ -1,0 +1,37 @@
+﻿@using Book_Shop.Models.Entity;
+@using PagedList;
+@using PagedList.Mvc;
+@model PagedList<KITAPLAR>
+@{
+    ViewBag.Title = "Author Books";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2>Author: @ViewBag.author_name</h2>
+
+<br />
+
+<table class="table table-striped">
+    <tr style="background-color: #0e63ea; color: white;">
+        <td>ID</td>
+        <td>NAME</td>
+        <td>CATEGORY</td>
+        <td>PUBLISH YEAR</td>
+        <td>PAGE NUMBER</td>
+        <td>PUBLISHER</td>
+    </tr>
+
+    @foreach (var b in Model)
+    {
+        <tr>
+            <td>@b.ID</td>
+            <td>@b.AD</td>
+            <td>@b.KATEGORILER.AD</td>
+            <td>@b.BASIMYIL</td>
+            <td>@b.SAYFA</td>
+            <td>@b.YAYINEVI</td>
+        </tr>
+    }
+
+</table>
+@Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("AuthorBook", new { sayfa }))
